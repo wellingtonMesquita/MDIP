@@ -1,0 +1,96 @@
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                    
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <form [formGroup]="formCliente">
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="inputAddress">Setores</label>
+                    <select class="form-control" formControlName="setor">
+                        <option *ngFor="let item of setores">{{item.nomeSetor}}</option>
+                       
+                      </select>
+                  </div>
+                  <div class="form-group col-md-2">
+                        <label for="inputAddress">Ordem?</label>
+                        <select class="form-control" formControlName="ordem">
+                        <option>Inicio</option> 
+                        <option>Fim</option>
+                        <option>Meio</option>
+                      </select>
+                      </div>
+                      <div class="form-group col-md-4">
+                            <label for="inputAddress">Data de Criação</label>
+                            <input type="date" name="bday" max="3000-12-31" 
+                            min="1000-01-01" class="form-control" formControlName="dataCriacao">
+                          </div>
+
+                          <div class="form-group col-md-2">
+                                <label for="inputAddress">Situação</label>
+                                <select class="form-control" formControlName="situacao">
+                                <option value = "A">Ativo</option > 
+                                <option value = "I">Inativo</option>
+                                <option value = "P">Publicado</option>
+                                <option value = "E">Em ediçâo</option>
+                              </select>
+                              </div>
+                              <div class="form-group col-md-4">
+                                <label for="inputAddress">Nome do Processo</label>
+                                <input type="text" class="form-control" formControlName="nomeProcesso">
+                              </div>
+    
+                         </div>
+                         <br>
+                         <br>
+                         <div class="row">
+                         <div class="form-group col-md-12">
+                                <button type="submit" class="btn btn-primary" (click)="pesquisarProcessos()">Pesquisar</button>
+                         </div>
+                         </div>
+              </form>
+              </div>
+              </div>
+              <br>
+              <hr style="color: black">
+              <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">Processos</h4>
+                                </div>
+
+                  <table  class="table table-bordered">
+                    <thead >
+                      <tr class="thead-primary">
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Data De Criacao</th>
+                        <th scope="col">Situação</th>
+                        <th scope="col">Ação</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let processosSetor of processosSetor; let i = index;">
+                        <td>{{ i + 1}}</td>
+                        <td>{{ processosSetor.processosModel.nomeProcesso}}</td>
+                        <td>{{ processosSetor.processosModel.dataCriacao}}</td>
+                        <td>{{ processosSetor.processosModel.situacao}}</td>
+                        <td>
+                            <a><i class="ti-search"></i></a>
+                            <a><i class="ti-pencil"></i></a>
+                            <a><i class="ti-close"></i></a>
+                            <a><i class="ti-trash"></i></a>
+                        <td>
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+                  
+                  <pagination  [page]="page" (paginationEvent)=changePage($event)></pagination>
+                  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>

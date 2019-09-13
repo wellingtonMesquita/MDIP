@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3 col-sm-6">
+                
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+        <form [formGroup]="formCliente" (ngSubmit)="gerar()">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputAddress">Setores</label>
+                <div *ngIf="valid" class="list-group" style="max-height: 300px;
+                overflow-y: auto;">
+                    <a (click)="adicionarSetor(v)" *ngFor="let v of setores" class="list-group-item list-group-item-action">{{v.nomeSetor}}</a>
+                  </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputAddress">Setores Selecionados</label>
+                <div class="list-group" *ngIf="validSelecionados">
+                    <a (click)="excluirSetor(v)" *ngFor="let v of setoresSelecionados" class="list-group-item list-group-item-action">{{v.nomeSetor}}</a>
+                   
+                  </div>
+              </div>
+              <div class="form-group col-md-9">
+                    <label for="inputAddress">Nome do Prosseço</label>
+                    <input  type="text" class="form-control border-input" placeholder="" value="" formControlName="nomeProcesso">
+                  </div>
+                      </div>
+            
+                     <div class="form-group col-md-4">
+                            <button type="submit" class="btn btn-primary">Gerar</button>
+                     </div>
+           </form>
+          </div>
+        </div>
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+      <br>
+      <br>

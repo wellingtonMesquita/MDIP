@@ -1,0 +1,24 @@
+
+
+<div>
+
+    <div class="row" style="margin-bottom: 20px;margin-left: 25px">
+        <input style="margin-left: 5px" (click) = "inicio()" type=image src="assets/img/formas/inicio.png" width=" 50" height="30"> 
+        <input style="margin-left: 5px" (click) = "etapa()" type=image src="assets/img/formas/etapa.png" width=" 50" height="30"> 
+        <input style="margin-left: 5px" (click) = "desicao()" type=image src="assets/img/formas/desicao.png" width=" 50" height="30"> 
+        <input style="margin-left: 5px" (click) = "fim()" type=image src="assets/img/formas/Fim.png" width=" 50" height="30"> 
+        <input style="margin-left: 5px" (click) = "bolinha()" type=image src="assets/img/formas/bolinha.png" width=" 50" height="30">    
+        <button type="button" style="float:right; margin-right: 45px" (click) = "salvarFluxograma()" class="btn btn-primary">Salvar</button> 
+      </div>
+<div class="col-8">
+  <div style=" position:fixed">
+    <canvas style=" margin-left: 23px ;border:5px solid #000000;" (mousemove)="desenhar4($event)"(click) = "salvar()" (dblclick)="editarFigura()"  #canvas width="1000" height="1000">
+    Se você visualizar esse texto, seu browser não suporta a tag canvas.
+    </canvas>
+   <ng-keyboard-shortcuts [shortcuts]="shortcuts"></ng-keyboard-shortcuts>
+    
+</div>
+
+</div>
+
+</div>
