@@ -95,13 +95,13 @@ export class CadastrarProcessoComponent implements OnInit{
                 });
             });
             this.showNotification('top','left','Cadastro feito com sucesso',2);
-            this.router.navigate(['/', 'fluxograma',this.idProcesso]);
+            //this.router.navigate(['**', 'cadastrarfluxograma',this.idProcesso]);
+            window.location.replace('http://localhost:4201/cadastrarfluxograma/'+ this.idProcesso);
         }
 
 
 
         showNotification(from, align,mensagem,tipo){
-            console.log("ddddddddddd");
             var type = ['','info','success','warning','danger'];
     
             var color = Math.floor((Math.random() * 4) + 1);

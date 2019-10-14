@@ -10,6 +10,7 @@ import { ShortcutInput, AllowIn, KeyboardShortcutsComponent } from 'ng-keyboard-
 import { Setores } from './formas/setores';
 import { MapeamentoService } from 'app/services/mapeamento.service';
 import { ActivatedRoute } from '@angular/router';
+import * as $ from 'jquery';
 
 
 export interface DialogData {
@@ -27,12 +28,16 @@ export interface DialogData {
 
 
 export class fluxogramaComponent implements OnInit, AfterViewInit{
+  @Input() idFluxograma;
+  @Input() modo;
+
   @ViewChild("canvas") myCanvas;
   ctx:CanvasRenderingContext2D;
  width = 1000;
  height = 480;
   numero  =  0;
   valid = false;
+  componentes = false;
   w = 0;
   s = 0;
   a = 0;
@@ -61,18 +66,12 @@ export class fluxogramaComponent implements OnInit, AfterViewInit{
   mover = false;
   linha = false;
   
+  
 
 
   closeResult: string;
   constructor(public dialog: MatDialog, public service: MapeamentoService, private route: ActivatedRoute) {
     this.service.desenhos.length = 0;
-    this.route.params.subscribe(res => {
-      
-    this.service.getProcessoSetor(res.id).subscribe(data=>{
-        this.incluirSetores(data);
-      });
-    
-    });
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(Teste, {
@@ -189,16 +188,24 @@ export class fluxogramaComponent implements OnInit, AfterViewInit{
   }
   @ViewChild(KeyboardShortcutsComponent) private keyboard: KeyboardShortcutsComponent;
 
-  
-  onMouseMove(e) {
-   console.log(e);
-    this.desenhar4(e);
+
+  getSetores(){
+    this.service.getProcessoSetor(Number.parseInt(this.idFluxograma)).subscribe(data=>{
+      this.incluirSetores(data);
+    });
   }
 
-
+  getFluxograma(){
+    this.service.getFluxograma(Number.parseInt(this.idFluxograma)).subscribe(data=>{
+      this.service.desenhos = data;
+      this.getSetores();
+      this.componentes = true;
+    });
+  }
 
   ngOnInit(): void {
-    
+    this.afs();
+    this.getFluxograma();
     this.imageObj.src = this.imageName;
     this.canvas = this.myCanvas.nativeElement;
     this.ctx = this.canvas.getContext("2d");
@@ -288,6 +295,7 @@ export class fluxogramaComponent implements OnInit, AfterViewInit{
       }
 
       if(element.nome == "setor"){
+        console.log("setor setor");
         element.y = element.y  + this.w;
         element.y = element.y + this.s;
         this.ctx.font = "20px Arial";
@@ -312,6 +320,7 @@ export class fluxogramaComponent implements OnInit, AfterViewInit{
    detectarObjeto(element,xx,yy){
         if((element.posicaoX > (xx-30) && element.posicaoX < (xx+30)) && (element.posicaoY > (yy-20) && element.posicaoY < (yy+20))){
           this.objetoColisao = element;
+          
          
         }
       
@@ -330,13 +339,12 @@ export class fluxogramaComponent implements OnInit, AfterViewInit{
       this.ctx.moveTo(0,x);
       this.ctx.lineTo(1000, y);
       this.ctx.stroke();
-      this.ctx.font = "15px Arial";
-      this.ctx.fillText(texto, 0 + 11, x);
       setor.texto = texto;
       setor.nome = "setor"
       setor.x = 11;
       setor.y = x;
       this.service.desenhos.push(setor);
+      this.limpar();
    }
   
   editarFigura(){
@@ -455,8 +463,9 @@ adicionarImagem(url){
 }
 
   desenhar4(e){
-    this.xx = (e.clientX - this.balaceamentox);
-    this.yy = (e.clientY - this.balaceamentoy);
+    if(this.componentes){
+    this.xx = (e.x );
+    this.yy = (e.y);
     if(this.atual != ""){
        if(this.atual == "figura"){
             let figura  =  new Figura();
@@ -464,8 +473,8 @@ adicionarImagem(url){
             figura.titulo = this.figuraTexto.titulo;
             figura.descricao = this.figuraTexto.descricao;
             figura.urlImagem = this.imageName;
-            figura.posicaoX = (e.clientX - this.balaceamentox);
-            figura.posicaoY = (e.clientY - this.balaceamentoy);
+            figura.posicaoX = (e.x);
+            figura.posicaoY = (e.y);
             figura.height = this.height;
             figura.width = this.width;
             this.criar(figura);
@@ -473,8 +482,8 @@ adicionarImagem(url){
     }
     if(this.atual == "bolinha"){
       let figura  =  new Figura();
-      figura.posicaoX = (e.clientX- (this.balaceamentox - 50));
-      figura.posicaoY = (e.clientY- (this.balaceamentoy - 25));
+      figura.posicaoX = (e.x + 45);
+      figura.posicaoY = (e.y  +26);
       figura.nome = "bolinha";
       this.criar(figura);
       this.dados = figura;
@@ -484,6 +493,7 @@ adicionarImagem(url){
    this.ctx.clearRect(0, 0, this.width, this.height);
    this.limpar();
    }
+    }
   }
 
   
@@ -518,9 +528,34 @@ adicionarImagem(url){
   }
 
   salvarFluxograma(){
+   let  idProcessos = {nome:'',idProcesso:''};
+   idProcessos.nome = "processoid"
+    idProcessos.idProcesso = this.idFluxograma;
+    this.service.desenhos.push(idProcessos);
+    if(this.modo == 3){
+      let  editar = {nome:'editar',idProcesso:''};
+      editar.idProcesso = this.idFluxograma;
+      this.service.desenhos.push(editar);
+    }
     this.service.cadastrarFluxograma(this.service.desenhos).subscribe(data => {
-      
     });
+  }
+
+ 
+afs(){
+ let canvas2 = $('canvas');
+    canvas2.mousemove(e => {
+      this.desenhar4(this.getMousePos(this.canvas,e));
+    });
+
+    }
+
+     getMousePos(canvas, evt) {
+      var rect = canvas.getBoundingClientRect();
+      return {
+        x: evt.clientX - (rect.left+50),
+        y: evt.clientY - (rect.top+30)
+      };
   }
  
 }

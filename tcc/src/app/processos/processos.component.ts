@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import {  ProcessosFiltro } from 'app/models/processosFiltro';
 import { ProcessosSetor } from 'app/models/processosSetor';
 import { Setor } from 'app/models/setor';
+import { Router } from '@angular/router';
 
 
 declare var $:any;
@@ -29,8 +30,8 @@ declare interface TableData {
         private page : Page;
         public tableData1: TableData;
         private filtro: ProcessosFiltro;
-
-        constructor(private formBuilder: FormBuilder, private service: MapeamentoService) {this.filtro = new ProcessosFiltro() }
+        router: Router;
+        constructor(router: Router, private formBuilder: FormBuilder, private service: MapeamentoService) {this.filtro = new ProcessosFiltro();this.router = router }
 
 
 
@@ -86,8 +87,15 @@ declare interface TableData {
            this.pageProcessos(event.page, event.size);
           }
 
-          pesquisar(){
-
+          detalhar(item:any){
+            console.log(item.processosModel.id);
+            //this.router.navigate(['/', 'detalharfluxograma',item.processosModel.id]);
+            window.location.replace('http://localhost:4201/cadastrarfluxograma/'+ item.processosModel.id);
+          }
+          editar(item:any){
+            console.log(item.processosModel.id);
+            //this.router.navigate(['/', 'editarfluxograma',item.processosModel.id]);
+            window.location.replace('http://localhost:4201/cadastrarfluxograma/'+ item.processosModel.id);
           }
         }
     

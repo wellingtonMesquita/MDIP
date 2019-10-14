@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Configurações da Figura</h1>
+<div mat-dialog-content>
+  <div>
+ <input type="text" [(ngModel)]="data.titulo">
+  </div>
+  <br>
+  <div>
+      <textarea type="text" [(ngModel)]="data.descricao"></textarea>
+    </div>
+</div>
+<div mat-dialog-actions>
+  <button style="margin-right: 50px" mat-button (click)="onNoClick()">Sair</button>
+  <button mat-button [mat-dialog-close]="data"  cdkFocusInitial>Comfirmar</button>
+</div>

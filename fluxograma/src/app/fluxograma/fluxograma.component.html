@@ -1,0 +1,55 @@
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-sm-3" style="margin-top: 23px; background-color: darkslategray">
+          <div  *ngIf = "modo !=2">
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px">
+                <input class="col-sm-3" style="margin-left: 5px" (click) = "inicio()" type=image src="assets/img/formas/inicio.png" width=" 40" height="30"> 
+                <input  #branco class="col-sm-3" style="margin-left: 5px" (click) = "etapa(branco)" type=image src="assets/img/formas/etapa.png" width=" 50" height="30">
+                <input  #tarefa  class="col-sm-3" style="margin-left: 5px" (click) = "etapa(tarefa)" type=image src="assets/img/formas/tarefa_de_servico.png" width="200" height="30"> 
+                <input  #mensagem  class="col-sm-3" style="margin-left: 5px" (click) = "etapa(mensagem)" type=image src="assets/img/formas/tarefa_de_envio_de_mensagem.png" width=" 50" height="30">
+                <input  #recebimento  class="col-sm-3" style="margin-left: 5px" (click) = "etapa(recebimento)" type=image src="assets/img/formas/tarefa_de_recebimento_de_mensagem.png" width=" 50" height="30">
+                <input  #negocial  class="col-sm-3" style="margin-left: 5px" (click) = "etapa(negocial)" type=image src="assets/img/formas/tarefa_de_regra_de_negocio.png" width=" 50" height="30">
+                <input  #script  class="col-sm-3" style="margin-left: 5px" (click) = "etapa(script)" type=image src="assets/img/formas/tarefa_de_script.png" width=" 50" height="30">
+                <input  #usuario  class="col-sm-3" style="margin-left: 5px" (click) = "etapa(usuario)" type=image src="assets/img/formas/tarefa_de_usuario.png" width=" 50" height="30">
+                <input  #manual  class="col-sm-3" style="margin-left: 5px" (click) = "etapa(manual)" type=image src="assets/img/formas/tarefa_manual.png" width=" 50" height="30"> 
+            </div>
+            <div class="row"style="margin-bottom: 10px; margin-top: 10px">
+                <input class="col-sm-3"  style="margin-left: 5px" (click) = "desicao()" type=image src="assets/img/formas/desicao.png" width=" 50" height="30"> 
+                <input   class="col-sm-3" style="margin-left: 5px" (click) = "fim()" type=image src="assets/img/formas/Fim.png" width=" 40" height="30"> 
+                <input   class="col-sm-3" style="margin-left: 5px" (click) = "bolinha()" type=image src="assets/img/formas/bolinha.png" width=" 50" height="30">    
+            </div>
+            
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div  style=" float: right;">
+                <canvas style=" margin-left: 23px ; margin-right:4px; margin-top: 23px; border: solid;border-color: darkgrey" (click) = "salvar()" (dblclick)="editarFigura()"  #canvas width="500" height="800" class="border">
+                Se você visualizar esse texto, seu browser não suporta a tag canvas.
+                </canvas>
+                <span></span>
+               <ng-keyboard-shortcuts [shortcuts]="shortcuts"></ng-keyboard-shortcuts>
+                
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

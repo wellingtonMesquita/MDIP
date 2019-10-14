@@ -8,9 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("fluxograma")
@@ -36,11 +37,22 @@ public class FluxogramaEndpoint {
     @Autowired
     private FluxogramaRepository fluxogramaRepository;
 
+    @Autowired
+    private ProcessosRepository processosRepository;
+
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST, path = "/cadastrar")
     public ResponseEntity<?> fluxogramaSalvar(@RequestBody List<Object> fluxograma){
+        Integer id;
+        List<FiguraModel> figuraModels = new ArrayList<>();
+        List<ConectorModel> conectorModels = new ArrayList<>();
+        List<LinhaModel> linhaModels = new ArrayList<>();
+        ProcessosModel processosModel  = new ProcessosModel();
+        SetoresFluxogramaModel setoresFluxogramaModel = new SetoresFluxogramaModel();
+
         for(Object i: fluxograma){
             LinkedHashMap aux = (LinkedHashMap) i;
+
             if(aux.get("nome").equals("figura")){
                 FiguraModel figuraModel = new FiguraModel();
                 figuraModel.setNome((String)aux.get("nome"));
@@ -52,7 +64,7 @@ public class FluxogramaEndpoint {
                 figuraModel.setHeight((Integer) aux.get("height"));
                 figuraModel.setPosicaoX((Integer) aux.get("posicaoX"));
                 figuraModel.setPosicaoY((Integer) aux.get("posicaoY"));
-                this.figuraRepository.save(figuraModel);
+                figuraModels.add(figuraModel);
             }
 
             if(aux.get("nome").equals("linhaSetor") || aux.get("nome").equals("linha")){
@@ -63,17 +75,17 @@ public class FluxogramaEndpoint {
                 linhaModel.setPosicaoX((Integer) aux.get("posicaoX"));
                 linhaModel.setPosicaoY((Integer) aux.get("posicaoY"));
                 linhaModel.setIdentificador((Integer) aux.get("identificador"));
-                this.linhaRepository.save(linhaModel);
+                linhaModels.add(linhaModel);
 
             }
             if(aux.get("nome").equals("setor")){
-                SetoresFluxogramaModel setoresFluxogramaModel = new SetoresFluxogramaModel();
+
                 setoresFluxogramaModel.setNome((String)aux.get("nome"));
                 setoresFluxogramaModel.setTexto((String)aux.get("texto"));
                 setoresFluxogramaModel.setX((Integer) aux.get("x"));
                 setoresFluxogramaModel.setY((Integer) aux.get("y"));
                 setoresFluxogramaModel.setIdentificador((Integer) aux.get("identificador"));
-                this.setoresFluxogramaRepository.save(setoresFluxogramaModel);
+
             }
 
 
@@ -83,13 +95,26 @@ public class FluxogramaEndpoint {
                 conectorModel.setPosicaoX((Integer) aux.get("posicaoX"));
                 conectorModel.setPosicaoY((Integer) aux.get("posicaoY"));
                 conectorModel.setIdentificador((Integer) aux.get("identificador"));
-                this.conectorRepository.save(conectorModel);
+                conectorModels.add(conectorModel);
+            }
+
+            if(aux.get("nome").equals("processoid")){
+
+             String idpro = (String)(aux.get("idProcesso"));
+             processosModel.setId(Long.parseLong(idpro));
+            }
+            if(aux.get("nome").equals("editar")){
+                String idpro = (String)(aux.get("idProcesso"));
+                this.figuraRepository.removeByProcessosModelId(Long.parseLong(idpro));
+                this.linhaRepository.removeByProcessosModelId(Long.parseLong(idpro));
+                this.conectorRepository.removeByProcessosModelId(Long.parseLong(idpro));
             }
 
 
         }
-
-
+        this.salvarFigura(figuraModels,processosModel);
+        this.salvarConector(conectorModels,processosModel);
+        this.salvarLinha(linhaModels,processosModel);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -100,6 +125,30 @@ public class FluxogramaEndpoint {
         return new ResponseEntity<>(fluxogramaRepository.getFluxograma(id), HttpStatus.OK);
     }
 
+    public void salvarFigura(List<FiguraModel> figuraModels,ProcessosModel processosModel){
+        for(FiguraModel figura : figuraModels){
+            figura.setProcessosModel(processosModel);
+            this.figuraRepository.save(figura);
+
+        }
+    }
+
+    public void salvarConector(List<ConectorModel> conectorModels,ProcessosModel processosModel){
+        for(ConectorModel conectorModel : conectorModels){
+            conectorModel.setProcessosModel(processosModel);
+            this.conectorRepository.save(conectorModel);
+
+        }
+
+    }
+
+    public void salvarLinha(List<LinhaModel> linhaModels, ProcessosModel processosModel){
+        for(LinhaModel linhaModel : linhaModels){
+            linhaModel.setProcessosModel(processosModel);
+            this.linhaRepository.save(linhaModel);
+
+        }
+    }
 
 
 }

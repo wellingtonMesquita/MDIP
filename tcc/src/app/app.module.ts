@@ -29,6 +29,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MapeamentoService } from './services/mapeamento.service';
 import { PaginationComponent } from './pagination/paginacao.component';
 import { NgxLoadingModule } from 'ngx-loading';
+import { DetalharFluxogramaComponent } from './detalhar_fluxograma/detalharfluxograma.component';
+import { CadastrarFluxogramaComponent } from './cadastrar_fluxograma/cadastrarfluxograma.component';
+import { EditarFluxogramaComponent } from './editar_fluxograma/editarfluxograma.component';
+import * as $ from 'jquery';
 
 
 
@@ -46,7 +50,10 @@ import { NgxLoadingModule } from 'ngx-loading';
     UpgradeComponent,
     fluxogramaComponent,
     Teste,
-    PaginationComponent
+    PaginationComponent,
+    DetalharFluxogramaComponent,
+    CadastrarFluxogramaComponent,
+    EditarFluxogramaComponent
 
   ],
   imports: [
