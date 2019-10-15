@@ -1,23 +1,87 @@
 <div class="container-fluid">
   <div class="row">
-      <div class="col-sm-3" style="margin-top: 23px; background-color: darkslategray">
-          <div  *ngIf = "modo !=2">
+      <div  class="col-sm-3" style="margin-top: 23px; background-color: darkslategray;max-height:604px;overflow-y: scroll;">
+          <div *ngIf = "modo !=2">
             <div class="row" style="margin-bottom: 10px; margin-top: 10px">
-                <input class="col-sm-3" style="margin-left: 5px" (click) = "inicio()" type=image src="assets/img/formas/inicio.png" width=" 40" height="30"> 
-                <input  #branco class="col-sm-3" style="margin-left: 5px" (click) = "etapa(branco)" type=image src="assets/img/formas/etapa.png" width=" 50" height="30">
-                <input  #tarefa  class="col-sm-3" style="margin-left: 5px" (click) = "etapa(tarefa)" type=image src="assets/img/formas/tarefa_de_servico.png" width="200" height="30"> 
-                <input  #mensagem  class="col-sm-3" style="margin-left: 5px" (click) = "etapa(mensagem)" type=image src="assets/img/formas/tarefa_de_envio_de_mensagem.png" width=" 50" height="30">
-                <input  #recebimento  class="col-sm-3" style="margin-left: 5px" (click) = "etapa(recebimento)" type=image src="assets/img/formas/tarefa_de_recebimento_de_mensagem.png" width=" 50" height="30">
-                <input  #negocial  class="col-sm-3" style="margin-left: 5px" (click) = "etapa(negocial)" type=image src="assets/img/formas/tarefa_de_regra_de_negocio.png" width=" 50" height="30">
-                <input  #script  class="col-sm-3" style="margin-left: 5px" (click) = "etapa(script)" type=image src="assets/img/formas/tarefa_de_script.png" width=" 50" height="30">
-                <input  #usuario  class="col-sm-3" style="margin-left: 5px" (click) = "etapa(usuario)" type=image src="assets/img/formas/tarefa_de_usuario.png" width=" 50" height="30">
-                <input  #manual  class="col-sm-3" style="margin-left: 5px" (click) = "etapa(manual)" type=image src="assets/img/formas/tarefa_manual.png" width=" 50" height="30"> 
+                <input #inicio class="col-sm-4"  (click) = "etapa(inicio)" type=image src="assets/img/formas/inicio.png" width=" 65" height="47"> 
+                <input  #inicioMensagem class="col-sm-4"  (click) = "etapa(inicioMensagem)" type=image src="assets/img/formas/inicioMensagens.png" width=" 65" height="47">
+                <input  #inicioTime  class="col-sm-4"  (click) = "etapa(inicioTime)" type=image src="assets/img/formas/inicioTime.png" width="65" height="47"> 
             </div>
-            <div class="row"style="margin-bottom: 10px; margin-top: 10px">
-                <input class="col-sm-3"  style="margin-left: 5px" (click) = "desicao()" type=image src="assets/img/formas/desicao.png" width=" 50" height="30"> 
-                <input   class="col-sm-3" style="margin-left: 5px" (click) = "fim()" type=image src="assets/img/formas/Fim.png" width=" 40" height="30"> 
-                <input   class="col-sm-3" style="margin-left: 5px" (click) = "bolinha()" type=image src="assets/img/formas/bolinha.png" width=" 50" height="30">    
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px">
+                    <input #inicioTarefa class="col-sm-4"  (click) = "etapa(inicioTarefa)" type=image src="assets/img/formas/inicioTarefa.png" width=" 65" height="47"> 
+                    <input  #inicioParalelo class="col-sm-4"  (click) = "etapa(inicioParalelo)" type=image src="assets/img/formas/inicioParalelo.png" width=" 65" height="47">
+                    <input  #inicioSinal  class="col-sm-4"  (click) = "etapa(inicioSinal)" type=image src="assets/img/formas/inicioSinal.png" width="65" height="47"> 
+                    <input #inicioMultiplo class="col-sm-4"  (click) = "etapa(inicioMultiplo)" type=image src="assets/img/formas/inicioMultiplo.png" width=" 65" height="47"> 
+                </div>
+                <div class="row" style="margin-bottom: 10px; margin-top: 10px">
+                        
+                        <input  #inicio2 class="col-sm-4"  (click) = "etapa(inicio2)" type=image src="assets/img/formas/inicio2.png" width=" 65" height="47">
+                        <input  #inicio2Condicional  class="col-sm-4"  (click) = "etapa(inicio2Condicional)" type=image src="assets/img/formas/inicio2Condicional.png" width="65" height="47"> 
+                        <input  #inicio2Losangulo  class="col-sm-4"  (click) = "etapa(inicio2Losangulo)" type=image src="assets/img/formas/inicio2Losangulo.png" width="65" height="47"> 
+                    </div>
+
+                    <div class="row" style="margin-bottom: 10px; margin-top: 10px">
+                        
+                            <input  #inicio2Mensagens class="col-sm-4"  (click) = "etapa(inicio2Mensagens)" type=image src="assets/img/formas/inicio2Mensagens.png" width=" 65" height="47">
+                            <input  #inicio2Multiplo  class="col-sm-4"  (click) = "etapa(inicio2Multiplo)" type=image src="assets/img/formas/inicio2Multiplo.png" width="65" height="47"> 
+                            <input  #inicio2Sinal  class="col-sm-4"  (click) = "etapa(inicio2Sinal)" type=image src="assets/img/formas/inicio2Sinal.png" width="65" height="47"> 
+                        </div>
+
+                        <div class="row" style="margin-bottom: 10px; margin-top: 10px">
+                        
+                                <input  #inicio2Tarefas class="col-sm-4"  (click) = "etapa(inicio2Tarefas)" type=image src="assets/img/formas/inicio2Tarefas.png" width=" 65" height="47">
+                                <input  #inicio2Time  class="col-sm-4"  (click) = "etapa(inicio2Time)" type=image src="assets/img/formas/inicio2Time.png" width="65" height="47"> 
+                            </div>
+                            <div class="row" style="margin-bottom: 10px; margin-top: 10px">
+                        
+                                    <input  #fim class="col-sm-4"  (click) = "etapa(fim)" type=image src="assets/img/formas/fim.png" width=" 65" height="47">
+                                    <input  #fimCopensacao  class="col-sm-4"  (click) = "etapa(fimCopensacao)" type=image src="assets/img/formas/fimCopensacao.png" width="65" height="47"> 
+                                    <input  #fimErro  class="col-sm-4"  (click) = "etapa(fimErro)" type=image src="assets/img/formas/fimErro.png" width="65" height="47"> 
+                                </div>
+        
+                                <div class="row" style="margin-bottom: 10px; margin-top: 10px">
+                                
+                                        <input  #fimEscadinha class="col-sm-4"  (click) = "etapa(fimEscadinha)" type=image src="assets/img/formas/fimEscadinha.png" width=" 65" height="47">
+                                        <input  #fimMensagem  class="col-sm-4"  (click) = "etapa(fimMensagem)" type=image src="assets/img/formas/fimMensagem.png" width="65" height="47"> 
+                                        <input  #fimLosangulo  class="col-sm-4"  (click) = "etapa(fimLosangulo)" type=image src="assets/img/formas/fimLosangulo.png" width="65" height="47"> 
+                                    </div>
+        
+                                    <div class="row" style="margin-bottom: 10px; margin-top: 10px">
+                                
+                                            <input  #fimSetinha class="col-sm-4"  (click) = "etapa(fimSetinha)" type=image src="assets/img/formas/fimSetinha.png" width=" 65" height="47">
+                                            <input  #fimSinal  class="col-sm-4"  (click) = "etapa(fimSinal)" type=image src="assets/img/formas/fimSinal.png" width="65" height="47"> 
+                                        </div>
+
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px">
+                    <input  #branco class="col-sm-4"  (click) = "etapa(branco)" type=image src="assets/img/formas/etapa.png" width=" 65" height="47">
+                    <input  #tarefa  class="col-sm-4"  (click) = "etapa(tarefa)" type=image src="assets/img/formas/tarefa_de_servico.png" width="65" height="47"> 
+                </div>
+
+                <div class="row" style="margin-bottom: 10px; margin-top: 10px">
+                    <input  #mensagem  class="col-sm-4"  (click) = "etapa(mensagem)" type=image src="assets/img/formas/tarefa_de_envio_de_mensagem.png" width="68" height="47">
+                    <input  #recebimento  class="col-sm-4"  (click) = "etapa(recebimento)" type=image src="assets/img/formas/tarefa_de_recebimento_de_mensagem.png" width=" 68" height="47">
+                    <input  #negocial  class="col-sm-4"  (click) = "etapa(negocial)" type=image src="assets/img/formas/tarefa_de_regra_de_negocio.png" width=" 68" height="47">
             </div>
+                <div class="row" style="margin-bottom: 10px; margin-top: 10px">
+                        <input  #script  class="col-sm-4"  (click) = "etapa(script)" type=image src="assets/img/formas/tarefa_de_script.png" width="68" height="47">
+                        <input  #usuario  class="col-sm-4"  (click) = "etapa(usuario)" type=image src="assets/img/formas/tarefa_de_usuario.png" width="68" height="47">
+                        <input  #manual  class="col-sm-4"  (click) = "etapa(manual)" type=image src="assets/img/formas/tarefa_manual.png" width="68" height="47"> 
+            </div>
+            <div class="row" style="margin-bottom: 10px; margin-top: 10px">
+                        
+                    <input  #desicao class="col-sm-4"  (click) = "etapa(desicao)" type=image src="assets/img/formas/desicao.png" width=" 65" height="47">
+                    <input  #desicaoComplexa  class="col-sm-4"  (click) = "etapa(desicaoComplexa)" type=image src="assets/img/formas/desicaoComplexa.png" width="65" height="47"> 
+                    <input  #desicaoEvento  class="col-sm-4"  (click) = "etapa(desicaoEvento)" type=image src="assets/img/formas/desicaoEvento.png" width="65" height="47"> 
+                </div>
+                <div class="row" style="margin-bottom: 10px; margin-top: 10px">
+                        
+                        <input  #desicaoEventoInicial class="col-sm-4"  (click) = "etapa(desicaoEventoInicial)" type=image src="assets/img/formas/desicaoEventoInicial.png" width=" 65" height="47">
+                        <input  #desicaoInclusiva  class="col-sm-4"  (click) = "etapa(desicaoInclusiva)" type=image src="assets/img/formas/desicaoInclusiva.png" width="65" height="47"> 
+                        <input  #desicaoParalela  class="col-sm-4"  (click) = "etapa(desicaoParalela)" type=image src="assets/img/formas/desicaoParalela.png" width="65" height="47"> 
+                    </div>
+
+                    
+
             
             </div>
         </div>
