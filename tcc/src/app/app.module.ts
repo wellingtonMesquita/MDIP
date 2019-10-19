@@ -32,7 +32,10 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { DetalharFluxogramaComponent } from './detalhar_fluxograma/detalharfluxograma.component';
 import { CadastrarFluxogramaComponent } from './cadastrar_fluxograma/cadastrarfluxograma.component';
 import { EditarFluxogramaComponent } from './editar_fluxograma/editarfluxograma.component';
+import { LoginComponent } from './login/login.component';
 import * as $ from 'jquery';
+
+
 
 
 
@@ -53,7 +56,8 @@ import * as $ from 'jquery';
     PaginationComponent,
     DetalharFluxogramaComponent,
     CadastrarFluxogramaComponent,
-    EditarFluxogramaComponent
+    EditarFluxogramaComponent,
+    LoginComponent
 
   ],
   imports: [

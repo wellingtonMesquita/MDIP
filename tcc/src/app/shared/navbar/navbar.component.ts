@@ -2,6 +2,8 @@ import { Component, OnInit, Renderer, ViewChild, ElementRef } from '@angular/cor
 import { ROUTES } from '../../sidebar/sidebar.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { LoginComponent } from 'app/login/login.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     moduleId: module.id,
@@ -18,7 +20,7 @@ export class NavbarComponent implements OnInit{
 
     @ViewChild("navbar-cmp") button;
 
-    constructor(location:Location, private renderer : Renderer, private element : ElementRef, private router: Router) {
+    constructor(public dialog: MatDialog,location:Location, private renderer : Renderer, private element : ElementRef, private router: Router) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
@@ -68,4 +70,18 @@ export class NavbarComponent implements OnInit{
           this.sidebarVisible = false;
           body.classList.remove('nav-open');
       };
+
+
+      openDialog(): void {
+        const dialogRef = this.dialog.open(LoginComponent, {
+          width: '400px',
+          height:'300px',
+        });
+    
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed',result);
+         
+          
+        });
+      }
 }

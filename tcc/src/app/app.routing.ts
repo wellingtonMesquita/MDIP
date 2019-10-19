@@ -13,6 +13,7 @@ import { SetorComponent } from './setor/setor.component';
 import { DetalharFluxogramaComponent } from './detalhar_fluxograma/detalharfluxograma.component';
 import { CadastrarFluxogramaComponent } from './cadastrar_fluxograma/cadastrarfluxograma.component';
 import { EditarFluxogramaComponent } from './editar_fluxograma/editarfluxograma.component';
+import { LoginComponent } from './login/login.component';
 
 export const AppRoutes: Routes = [
     {
@@ -67,5 +68,9 @@ export const AppRoutes: Routes = [
     {
         path: 'editarfluxograma/:id',
         component: EditarFluxogramaComponent
+    },
+    {
+        path: 'login',
+        component: LoginComponent
     }
 ]
