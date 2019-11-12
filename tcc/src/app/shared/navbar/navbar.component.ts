@@ -42,7 +42,7 @@ export class NavbarComponent implements OnInit{
                 return this.listTitles[item].title;
             }
         }
-        return 'Fluxograma';
+        return 'Login';
     }
     sidebarToggle() {
         var $toggle = document.getElementsByClassName('navbar-toggler')[0];
@@ -73,15 +73,6 @@ export class NavbarComponent implements OnInit{
 
 
       openDialog(): void {
-        const dialogRef = this.dialog.open(LoginComponent, {
-          width: '400px',
-          height:'300px',
-        });
-    
-        dialogRef.afterClosed().subscribe(result => {
-          console.log('The dialog was closed',result);
-         
-          
-        });
+       console.log("logout");
       }
 }

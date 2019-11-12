@@ -14,7 +14,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { Teste } from './fluxograma/teste.component';
 import { FormsModule } from '@angular/forms';
 import { ScrollingModule, ScrollDispatchModule, ScrollDispatcher } from '@angular/cdk/scrolling';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { ReactiveFormsModule } from '@angular/forms';
 import { MapeamentoService } from './services/mapeamento.service';
 import { NgxLoadingModule } from 'ngx-loading';
@@ -22,6 +22,7 @@ import { DetalharFluxogramaComponent } from './detalhar_fluxograma/detalharfluxo
 import { CadastrarFluxogramaComponent } from './cadastrar_fluxograma/cadastrarfluxograma.component';
 import { EditarFluxogramaComponent } from './editar_fluxograma/editarfluxograma.component';
 import * as $ from 'jquery';
+import { BasicAuthHtppInterceptorService } from './services/BasicAuthHtppInterceptorService.service ';
 
 
 
@@ -57,7 +58,11 @@ import * as $ from 'jquery';
    
 
   ],
-  providers: [ScrollDispatcher,MapeamentoService],
+  providers: [ScrollDispatcher,MapeamentoService,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: BasicAuthHtppInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent],
   entryComponents: [Teste]
 })

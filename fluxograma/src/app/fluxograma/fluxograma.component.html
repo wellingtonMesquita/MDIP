@@ -1,6 +1,16 @@
 <div class="container-fluid">
+<header>
+<div class="row">
+<h3 class="text-center mt-4" style="font-family: Impact; color:dodgerblue">{{nomeProcesso}}</h3>
+<button style="float: right;margin-left: 10px;margin-right: 10px;" class="btn btn-primary"> Salvar</button>
+<button style=" float: right;margin-left: 10px;margin-right: 10px;" class="btn btn-primary"> Publicar</button>
+<button style=" margin-left: 10px;margin-right: 10px;" class="btn btn-primary"> Voltar</button>
+
+</div>
+</header>
+
   <div class="row">
-      <div  class="col-sm-3" style="margin-top: 23px; background-color: darkslategray;max-height:604px;overflow-y: scroll;">
+      <div  class="col-sm-3" style="margin-top: 23px; background-color: darkslategray;max-height:554px;overflow-y: scroll; border: solid;border-block-color: darkgrey">
           <div *ngIf = "modo !=2">
             <div class="row" style="margin-bottom: 10px; margin-top: 10px">
                 <input #inicio class="col-sm-4"  (click) = "etapa(inicio)" type=image src="assets/img/formas/inicio.png" width=" 65" height="47"> 
@@ -87,7 +97,7 @@
         </div>
         <div class="col-sm-9">
             <div  style=" float: right;">
-                <canvas style=" margin-left: 23px ; margin-right:4px; margin-top: 23px; border: solid;border-color: darkgrey" (click) = "salvar()" (dblclick)="editarFigura()"  #canvas width="500" height="800" class="border">
+                <canvas style=" margin-left: 23px ; margin-right:4px; margin-top: 23px; border: solid;border-color: darkgrey" (click) = "salvar()" (dblclick)="editarFigura()"  #canvas width="500" height="700" class="border">
                 Se você visualizar esse texto, seu browser não suporta a tag canvas.
                 </canvas>
                 <span></span>

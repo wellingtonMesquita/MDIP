@@ -1,28 +1,32 @@
-<h1 mat-dialog-title>Configurações da Figura</h1>
-<div mat-dialog-content>
+<h1 style="margin-left: 43%; font-family: fantasy;">Login</h1>
+<hr>
+<br>
+<div >
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
 
                     <!-- User -->
-                    <div class="md-form">
+                    <div style="margin-left: 30%;" class="md-form col-4 text-center mt-4">
                        
-                        <input type="text" id="loginFormUser" formControlName="username" class="form-control">
+                        <input type="text" style=" width: 420px;" id="loginFormUser" formControlName="username" class="form-control "placeholder="Usuario">
                            
-                    </div>
+                    </div> 
                 <br>
                     <!-- Password -->
-                    <div class="md-form">
+                    <div class="md-form " style="margin-left: 30%;">
             
-                        <input type="password" id="loginFormPassword" formControlName="password" class="form-control"placeholder="Password"/>
+                        <input style="width: 420px;" type="password" id="loginFormPassword" formControlName="password" class="form-control"placeholder="Password"/>
 
                     </div>
 
                     <!-- Sign in button -->
                 </form>
         </div>
-        <div mat-dialog-actions>
+      
+        <br>
+        <div >
             <div class="text-center mt-4">
-                <button [disabled]="loading" mdbBtn color="info" mdbWavesEffect (click)="onSubmit()" >Entrar</button>
+                <button [disabled]="loading" class="btn Primary" (click)="onSubmit()" >Entrar</button>
                
             </div>
         </div>

@@ -10,8 +10,6 @@ import { NavbarModule} from './shared/navbar/navbar.module';
 import { FixedPluginModule} from './shared/fixedplugin/fixedplugin.module';
 import { KeyboardShortcutsModule } from "ng-keyboard-shortcuts";
 import { UserComponent }   from './user/user.component';
-import { TableComponent }   from './table/table.component';
-import { TypographyComponent }   from './typography/typography.component';
 import {  CadastrarProcessoComponent }   from './criar-processo/cadastrar-processo.component';
 import { NotificationsComponent }   from './notifications/notifications.component';
 import { UpgradeComponent }   from './upgrade/upgrade.component';
@@ -24,7 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { ScrollingModule, ScrollDispatchModule, ScrollDispatcher } from '@angular/cdk/scrolling';
 import { SetorComponent } from './setor/setor.component';
 import { ProcessosComponent } from './processos/processos.component';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { ReactiveFormsModule } from '@angular/forms';
 import { MapeamentoService } from './services/mapeamento.service';
 import { PaginationComponent } from './pagination/paginacao.component';
@@ -34,6 +32,7 @@ import { CadastrarFluxogramaComponent } from './cadastrar_fluxograma/cadastrarfl
 import { EditarFluxogramaComponent } from './editar_fluxograma/editarfluxograma.component';
 import { LoginComponent } from './login/login.component';
 import * as $ from 'jquery';
+import { BasicAuthHtppInterceptorService } from './services/BasicAuthHtppInterceptorService.service ';
 
 
 
@@ -45,8 +44,6 @@ import * as $ from 'jquery';
     AppComponent,
     ProcessosComponent,
     UserComponent,
-    TableComponent,
-    TypographyComponent,
     CadastrarProcessoComponent,
     SetorComponent,
     NotificationsComponent,
@@ -83,7 +80,11 @@ import * as $ from 'jquery';
    
 
   ],
-  providers: [ScrollDispatcher,MapeamentoService],
+  providers: [ScrollDispatcher,MapeamentoService,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: BasicAuthHtppInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent],
   entryComponents: [Teste]
 })

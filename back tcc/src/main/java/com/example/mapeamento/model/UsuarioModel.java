@@ -1,5 +1,7 @@
 package com.example.mapeamento.model;
 
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,9 +27,8 @@ public class UsuarioModel implements Serializable {
 
     private String cargo;
 
-    private InstituicaoModel instituicaoModel;
+    private String password ;
 
-    private SetorModel setorModel;
 
     public Long getId() {
         return id;
@@ -69,33 +70,15 @@ public class UsuarioModel implements Serializable {
         this.cargo = cargo;
     }
 
-    public InstituicaoModel getInstituicaoModel() {
-        return instituicaoModel;
+    public String getPassword() {
+        return password;
     }
 
-    public void setInstituicaoModel(InstituicaoModel instituicaoModel) {
-        this.instituicaoModel = instituicaoModel;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public SetorModel getSetorModel() {
-        return setorModel;
-    }
 
-    public void setSetorModel(SetorModel setorModel) {
-        this.setorModel = setorModel;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UsuarioModel usuarioModel = (UsuarioModel) o;
-        return Objects.equals(id, usuarioModel.id) &&
-                Objects.equals(nomeUsuario, usuarioModel.nomeUsuario) &&
-                Objects.equals(email, usuarioModel.email) &&
-                Objects.equals(nome, usuarioModel.nome) &&
-                Objects.equals(cargo, usuarioModel.cargo);
-    }
 
     @Override
     public int hashCode() {

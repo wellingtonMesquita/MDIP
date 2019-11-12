@@ -1,8 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData } from 'app/fluxograma/fluxograma.component';
 import { AuthenticationService } from 'app/services/authentication.service';
 
 
@@ -25,9 +23,7 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        public dialogRef: MatDialogRef<LoginComponent>,
         private loginservice: AuthenticationService,
-      @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) {
        
        
@@ -59,6 +55,7 @@ export class LoginComponent implements OnInit {
         this.loading = true;
         (this.loginservice.authenticate(this.f.username.value, this.f.password.value).subscribe(
             data => {
+              console.log(data);
               this.router.navigate([''])
               this.invalidLogin = false
             },

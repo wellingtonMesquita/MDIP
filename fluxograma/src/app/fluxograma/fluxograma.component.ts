@@ -34,7 +34,7 @@ export class fluxogramaComponent implements OnInit, AfterViewInit{
   @ViewChild("canvas") myCanvas;
   ctx:CanvasRenderingContext2D;
  width = 1000;
- height = 600;
+ height = 550;
   numero  =  0;
   valid = false;
   componentes = false;
@@ -65,6 +65,7 @@ export class fluxogramaComponent implements OnInit, AfterViewInit{
   aux = [];
   mover = false;
   linha = false;
+  nomeProcesso;
   
   
 
@@ -203,9 +204,20 @@ export class fluxogramaComponent implements OnInit, AfterViewInit{
     });
   }
 
+  getToken(){
+    this.service.getToken().subscribe(data => {
+      if(data!= null){
+        console.log(data);
+        sessionStorage.setItem('token','Bearer '+data.token);
+        this.afs();
+        this.getFluxograma();
+      }
+      
+     });
+  }
+
   ngOnInit(): void {
-    this.afs();
-    this.getFluxograma();
+    this.getToken();
     this.imageObj.src = this.imageName;
     this.canvas = this.myCanvas.nativeElement;
     this.ctx = this.canvas.getContext("2d");
@@ -226,6 +238,8 @@ export class fluxogramaComponent implements OnInit, AfterViewInit{
   incluirSetores(data){
     let valor = 160;
     data.forEach(x => {
+      console.log("log",x);
+      this.nomeProcesso  =  x.processosModel.nomeProcesso
       this.desenharSetores(valor,valor,x.setorModel.nomeSetor);
       valor = (valor + 160);
     });

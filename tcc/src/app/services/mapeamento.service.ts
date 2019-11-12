@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Setor } from 'app/models/setor';
 import { processosModel } from 'app/models/processosModel';
 
@@ -29,10 +29,13 @@ export class MapeamentoService {
       }
 
       buscarSetores() {
-        return this._http.get<Array<Setor>>('http://localhost:8080/setor/listar')
+        const headers = new HttpHeaders({ Authorization: sessionStorage.getItem('token')});
+        console.log("ola",sessionStorage.getItem('token'));
+        return this._http.get<Array<Setor>>('http://localhost:8080/setor/listar',{headers})
       }
 
       getProcessoPage(ProcessosFiltro){
+       
         return this._http.post<any>('http://localhost:8080/processos/listar',ProcessosFiltro)
         
       }
@@ -42,8 +45,14 @@ export class MapeamentoService {
       }
 
       getProcessoSetor(id){
+       
         return this._http.get<any>('http://localhost:8080/setor_processos/' + id)
-      }
+     
+      
+       }
+     
+   
+      
       cadastrarProcessoSetor(file){
         return this._http.post('http://localhost:8080/setor_processos/cadastrar', file)
       }

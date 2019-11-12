@@ -49,7 +49,12 @@ export class MapeamentoService {
       }
 
       getFluxograma(id){
+        console.log(sessionStorage.getItem('token'));
         return this._http.get<any>('http://localhost:8080/fluxograma/' + id)
+      }
+
+      getToken(){
+        return this._http.get<any>('http://localhost:8080/token')
       }
 }
 
