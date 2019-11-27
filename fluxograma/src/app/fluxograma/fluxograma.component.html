@@ -1,18 +1,22 @@
 <div class="container-fluid">
 <header>
-<div class="row">
+<div class="row" >
 <h3 class="text-center mt-4" style="font-family: Impact; color:dodgerblue">{{nomeProcesso}}</h3>
-<button style="float: right;margin-left: 10px;margin-right: 10px;" class="btn btn-primary"> Salvar</button>
-<button style=" float: right;margin-left: 10px;margin-right: 10px;" class="btn btn-primary"> Publicar</button>
-<button style=" margin-left: 10px;margin-right: 10px;" class="btn btn-primary"> Voltar</button>
+<button  style=" float: right;margin-left: 10px;margin-right: 10px;" class="btn btn-primary"> Gerar Imagem</button>
+<button *ngIf="modo != 2" style="float: right;margin-left: 10px;margin-right: 10px;" class="btn btn-primary" (click)="salvarFluxograma()"> Salvar</button>
+<button *ngIf="modo != 2" style=" float: right;margin-left: 10px;margin-right: 10px;" class="btn btn-primary"> Publicar</button>
+<button  (click) = "voltar()"style=" margin-left: 10px;margin-right: 10px;" class="btn btn-primary"> Voltar</button>
 
 </div>
 </header>
 
   <div class="row">
-      <div  class="col-sm-3" style="margin-top: 23px; background-color: darkslategray;max-height:554px;overflow-y: scroll; border: solid;border-block-color: darkgrey">
-          <div *ngIf = "modo !=2">
+      <div *ngIf="modo != 2" class="col-sm-3" style="margin-top: 23px; background-color:white;max-height:554px;overflow-y: scroll; border: solid;border-block-color: darkgrey">
+          <div >
             <div class="row" style="margin-bottom: 10px; margin-top: 10px">
+                <input   class="col-sm-4"  (click) = "texto()" type=image src="assets/img/formas/texto.png" width="45" height="47"> 
+                <input   class="col-sm-4"  (click) = "bolinha()" type=image src="assets/img/formas/setaexibir.png" width="10" height="47"> 
+                
                 <input #inicio class="col-sm-4"  (click) = "etapa(inicio)" type=image src="assets/img/formas/inicio.png" width=" 65" height="47"> 
                 <input  #inicioMensagem class="col-sm-4"  (click) = "etapa(inicioMensagem)" type=image src="assets/img/formas/inicioMensagens.png" width=" 65" height="47">
                 <input  #inicioTime  class="col-sm-4"  (click) = "etapa(inicioTime)" type=image src="assets/img/formas/inicioTime.png" width="65" height="47"> 
@@ -95,9 +99,10 @@
             
             </div>
         </div>
+        <div class="col-sm-1" style="margin-right: 100px;"></div>
         <div class="col-sm-9">
-            <div  style=" float: right;">
-                <canvas style=" margin-left: 23px ; margin-right:4px; margin-top: 23px; border: solid;border-color: darkgrey" (click) = "salvar()" (dblclick)="editarFigura()"  #canvas width="500" height="700" class="border">
+            <div  style=" float: right;" >
+                <canvas class="col-sm-8" style=" margin-left: 23px ; margin-right:4px; margin-top: 23px; border: solid;border-color: darkgrey" (click) = "salvar()" (dblclick)="editarFigura()"  #canvas width="500" height="700" class="border">
                 Se você visualizar esse texto, seu browser não suporta a tag canvas.
                 </canvas>
                 <span></span>

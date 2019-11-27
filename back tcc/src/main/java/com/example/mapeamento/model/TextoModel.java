@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-public class ConectorModel {
+public class TextoModel {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -18,6 +18,7 @@ public class ConectorModel {
     private ProcessosModel processosModel;
 
     private String nome;
+    private String titulo;
     private Integer identificador;
     private Integer posicaoX;
     private Integer posicaoY;
@@ -72,5 +73,13 @@ public class ConectorModel {
 
     public void setPosicaoY(Integer posicaoY) {
         this.posicaoY = posicaoY;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 }

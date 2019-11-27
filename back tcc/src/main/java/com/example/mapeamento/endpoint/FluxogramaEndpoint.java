@@ -45,8 +45,9 @@ public class FluxogramaEndpoint {
     public ResponseEntity<?> fluxogramaSalvar(@RequestBody List<Object> fluxograma){
         Integer id;
         List<FiguraModel> figuraModels = new ArrayList<>();
-        List<ConectorModel> conectorModels = new ArrayList<>();
+        List<TextoModel> textoModels = new ArrayList<>();
         List<LinhaModel> linhaModels = new ArrayList<>();
+
         ProcessosModel processosModel  = new ProcessosModel();
         SetoresFluxogramaModel setoresFluxogramaModel = new SetoresFluxogramaModel();
 
@@ -65,6 +66,28 @@ public class FluxogramaEndpoint {
                 figuraModel.setPosicaoX((Integer) aux.get("posicaoX"));
                 figuraModel.setPosicaoY((Integer) aux.get("posicaoY"));
                 figuraModels.add(figuraModel);
+            }
+            if(aux.get("nome").equals("figuraSeta")){
+                FiguraModel figuraModel = new FiguraModel();
+                figuraModel.setNome((String)aux.get("nome"));
+                figuraModel.setDescricao((String)aux.get("descricao"));
+                figuraModel.setTitulo((String)aux.get("titulo"));
+                figuraModel.setIdentificador((Integer) aux.get("identificador"));
+                figuraModel.setUrlImagem((String)aux.get("urlImagem"));
+                figuraModel.setWidth((Integer) aux.get("width"));
+                figuraModel.setHeight((Integer) aux.get("height"));
+                figuraModel.setPosicaoX((Integer) aux.get("posicaoX"));
+                figuraModel.setPosicaoY((Integer) aux.get("posicaoY"));
+                figuraModels.add(figuraModel);
+            }
+            if(aux.get("nome").equals("texto")){
+                TextoModel textoModel = new TextoModel();
+                textoModel.setNome((String)aux.get("nome"));
+                textoModel.setTitulo((String)aux.get("titulo"));
+                textoModel.setIdentificador((Integer) aux.get("identificador"));
+                textoModel.setPosicaoX((Integer) aux.get("posicaoX"));
+                textoModel.setPosicaoY((Integer) aux.get("posicaoY"));
+                textoModels.add(textoModel);
             }
 
             if(aux.get("nome").equals("linhaSetor") || aux.get("nome").equals("linha")){
@@ -89,15 +112,6 @@ public class FluxogramaEndpoint {
             }
 
 
-            if(aux.get("nome").equals("bolinha")){
-                ConectorModel conectorModel = new ConectorModel();
-                conectorModel.setNome((String)aux.get("nome"));
-                conectorModel.setPosicaoX((Integer) aux.get("posicaoX"));
-                conectorModel.setPosicaoY((Integer) aux.get("posicaoY"));
-                conectorModel.setIdentificador((Integer) aux.get("identificador"));
-                conectorModels.add(conectorModel);
-            }
-
             if(aux.get("nome").equals("processoid")){
 
              String idpro = (String)(aux.get("idProcesso"));
@@ -107,13 +121,13 @@ public class FluxogramaEndpoint {
                 String idpro = (String)(aux.get("idProcesso"));
                 this.figuraRepository.removeByProcessosModelId(Long.parseLong(idpro));
                 this.linhaRepository.removeByProcessosModelId(Long.parseLong(idpro));
-                this.conectorRepository.removeByProcessosModelId(Long.parseLong(idpro));
+                this.textoRepository.removeByProcessosModelId(Long.parseLong(idpro));
             }
 
 
         }
         this.salvarFigura(figuraModels,processosModel);
-        this.salvarConector(conectorModels,processosModel);
+        this.salvarConector(textoModels,processosModel);
         this.salvarLinha(linhaModels,processosModel);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -133,10 +147,10 @@ public class FluxogramaEndpoint {
         }
     }
 
-    public void salvarConector(List<ConectorModel> conectorModels,ProcessosModel processosModel){
-        for(ConectorModel conectorModel : conectorModels){
-            conectorModel.setProcessosModel(processosModel);
-            this.conectorRepository.save(conectorModel);
+    public void salvarConector(List<TextoModel> textoModels, ProcessosModel processosModel){
+        for(TextoModel textoModel : textoModels){
+            textoModel.setProcessosModel(processosModel);
+            this.textoRepository.save(textoModel);
 
         }
 

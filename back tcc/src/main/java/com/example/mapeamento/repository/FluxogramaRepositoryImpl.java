@@ -20,11 +20,11 @@ public class FluxogramaRepositoryImpl implements FluxogramaRepository{
     public List<Object> getFluxograma(Long id) {
         List<Object> fluxograma = new ArrayList<>();
 
-        Query conector = entityManager.createNativeQuery("SELECT * FROM conector_model fl inner join processos_model pro on fl.processos_model_id = pro.id  where pro.id = :id ", ConectorModel.class);
+        Query conector = entityManager.createNativeQuery("SELECT * FROM texto_model fl inner join processos_model pro on fl.processos_model_id = pro.id  where pro.id = :id ", TextoModel.class);
         conector.setParameter("id",id);
-        List<ConectorModel> conectorModels = conector.getResultList();
-        for(ConectorModel conectorModel: conectorModels){
-            fluxograma.add(conectorModel);
+        List<TextoModel> textoModels = conector.getResultList();
+        for(TextoModel textoModel : textoModels){
+            fluxograma.add(textoModel);
         }
         Query figura = entityManager.createNativeQuery("SELECT * FROM figura_model fl inner join processos_model pro on fl.processos_model_id = pro.id  where pro.id = :id ", FiguraModel.class);
         figura.setParameter("id",id);

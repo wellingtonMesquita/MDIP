@@ -72,7 +72,7 @@ export class NavbarComponent implements OnInit{
       };
 
 
-      openDialog(): void {
-       console.log("logout");
+      logout(): void {
+        sessionStorage.clear();
       }
 }

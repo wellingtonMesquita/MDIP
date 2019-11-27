@@ -1,7 +1,12 @@
 package com.example.mapeamento.repository;
 
-import com.example.mapeamento.model.ConectorModel;
+import com.example.mapeamento.model.TextoModel;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface TextoRepository extends PagingAndSortingRepository<ConectorModel, Long> {
+import javax.transaction.Transactional;
+import java.util.List;
+
+public interface TextoRepository extends PagingAndSortingRepository<TextoModel, Long> {
+    @Transactional
+    List<TextoModel> removeByProcessosModelId(Long id);
 }

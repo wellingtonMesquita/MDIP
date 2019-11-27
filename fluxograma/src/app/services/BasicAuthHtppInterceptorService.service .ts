@@ -13,7 +13,6 @@ export class BasicAuthHtppInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     if (sessionStorage.getItem('token')) {
-      console.log("ola nubs",sessionStorage.getItem('token'));
       req = req.clone({
         setHeaders: {
           Authorization: sessionStorage.getItem('token')

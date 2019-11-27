@@ -20,6 +20,8 @@ public class ProcessosModel implements Serializable {
 
     private String situacao;
 
+    private byte[] imagem;
+
 
    @ManyToOne(fetch = FetchType.LAZY)
    @JoinColumn()
@@ -67,5 +69,11 @@ public class ProcessosModel implements Serializable {
         this.instituicaoModel = instituicaoModel;
     }
 
+    public byte[] getImagem() {
+        return imagem;
+    }
 
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
+    }
 }

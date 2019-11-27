@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 export class User{
   constructor(
@@ -23,6 +24,7 @@ export class AuthenticationService {
 
 
   constructor(
+    private router:Router,
     private httpClient:HttpClient
   ) { 
      }
@@ -36,7 +38,10 @@ export class AuthenticationService {
           sessionStorage.setItem('username',username);
           let tokenStr= 'Bearer '+userData.token;
           sessionStorage.setItem('token', tokenStr);
+          this.router.navigate(['/',"processos"])
           return userData;
+          
+
          }
        )
   

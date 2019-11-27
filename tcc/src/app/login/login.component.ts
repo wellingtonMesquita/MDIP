@@ -51,16 +51,18 @@ export class LoginComponent implements OnInit {
         if (this.loginForm.invalid) {
             return;
         }
+        sessionStorage.setItem('username',"0");
+        sessionStorage.setItem('token', "0");
 
         this.loading = true;
         (this.loginservice.authenticate(this.f.username.value, this.f.password.value).subscribe(
             data => {
-              console.log(data);
-              this.router.navigate([''])
               this.invalidLogin = false
+             
             },
             error => {
               this.invalidLogin = true
+              sessionStorage.clear();
       
             }
           )

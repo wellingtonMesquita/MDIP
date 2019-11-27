@@ -4,13 +4,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogData } from './fluxograma.component';
 
 @Component({
-    selector: 'teste',
-    templateUrl: 'teste.component.html',
+    selector: 'texto-figura',
+    templateUrl: 'texto-figura.component.html',
   })
-  export class Teste {
+  export class TextoFigura {
   
     constructor(
-      public dialogRef: MatDialogRef<Teste>,
+      public dialogRef: MatDialogRef<TextoFigura>,
       @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
     
   

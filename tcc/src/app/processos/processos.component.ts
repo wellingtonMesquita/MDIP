@@ -23,6 +23,7 @@ declare interface TableData {
 
 
     export class ProcessosComponent implements OnInit{
+      processos;
       public loading = false;
         formCliente: FormGroup;
         setores:Array<Setor> = new Array;
@@ -78,8 +79,11 @@ declare interface TableData {
               console.log("resposta",res);
               this.page = res
               this.processosSetor =  this.page.content;
+              this.processos = this.processosSetor.filter(function (a) {
+                return !this[JSON.stringify(a)] && (this[JSON.stringify(a)] = true);
+              }, Object.create(null))
               this.loading = false;
-              console.log("resposta",this.processosSetor);
+              console.log("resposta",this.processos);
             });
           }
         
@@ -90,12 +94,12 @@ declare interface TableData {
           detalhar(item:any){
             console.log(item.processosModel.id);
             //this.router.navigate(['/', 'detalharfluxograma',item.processosModel.id]);
-            window.location.replace('http://localhost:4201/cadastrarfluxograma/'+ item.processosModel.id);
+            window.location.replace('http://localhost:4201/detalharfluxograma/'+ item.processosModel.id);
           }
           editar(item:any){
             console.log(item.processosModel.id);
             //this.router.navigate(['/', 'editarfluxograma',item.processosModel.id]);
-            window.location.replace('http://localhost:4201/cadastrarfluxograma/'+ item.processosModel.id);
+            window.location.replace('http://localhost:4201/editarfluxograma/'+ item.processosModel.id);
           }
         }
     

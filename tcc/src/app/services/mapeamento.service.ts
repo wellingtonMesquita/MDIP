@@ -29,9 +29,7 @@ export class MapeamentoService {
       }
 
       buscarSetores() {
-        const headers = new HttpHeaders({ Authorization: sessionStorage.getItem('token')});
-        console.log("ola",sessionStorage.getItem('token'));
-        return this._http.get<Array<Setor>>('http://localhost:8080/setor/listar',{headers})
+        return this._http.get<Array<Setor>>('http://localhost:8080/setor/listar')
       }
 
       getProcessoPage(ProcessosFiltro){

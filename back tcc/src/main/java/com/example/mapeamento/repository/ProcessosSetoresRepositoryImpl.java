@@ -39,7 +39,7 @@ public class ProcessosSetoresRepositoryImpl implements ProcessosSetoresRepositor
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(" SELECT * FROM setores_processos_model em inner join processos_model pro on em.processos_model_id = pro.id inner join setor_model setor on em.setor_model_id = setor.id where 1=1 ");
+        stringBuilder.append(" SELECT * FROM processos_model pro inner join setores_processos_model em on em.processos_model_id = pro.id inner join setor_model setor on em.setor_model_id = setor.id  where 1=1 ");
 
         if(processosVO.getSituacao()!=null){
             stringBuilder.append(" and pro.situacao = :situacao ");
@@ -54,7 +54,7 @@ public class ProcessosSetoresRepositoryImpl implements ProcessosSetoresRepositor
             stringBuilder.append(" and  pro.nome_processo like :nomeProcesso");
         }
         if(processosVO.getSetor()!=(null)){
-            stringBuilder.append(" and setor.nome_setor like :nomeSetor ");
+            stringBuilder.append(" and setor.nome_setor like :nomeSetor");
         }
 
 

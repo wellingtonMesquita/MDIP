@@ -246,6 +246,7 @@ export class fluxogramaComponent implements OnInit, AfterViewInit{
 
   limpar(){ 
     this.objetoColisao = null;
+    
     this.service.desenhos.forEach(element => {
       if(element.nome == "figura"){
         if(this.mover){
@@ -314,7 +315,7 @@ export class fluxogramaComponent implements OnInit, AfterViewInit{
    criarTexto(element){
     this.ctx.font = "15px Arial";
     
-    this.ctx.fillText(element.titulo, element.posicaoX + 14, element.posicaoY + 33);
+    this.ctx.fillText(element.titulo, element.posicaoX + 14, element.posicaoY + 50);
    }
 
    detectarObjeto(element,xx,yy){
@@ -419,11 +420,17 @@ salvarEdicao(){
      }
 
    if(this.atual == "bolinha"){
-    this.ctx.clearRect(0, 0, this.width, this.height);
     this.ctx.beginPath();
-    this.ctx.arc(figura.posicaoX, figura.posicaoY, 5, 0, Math.PI*2, true);
+    this.ctx.moveTo(figura.posicaoX,figura.posicaoY);
+    this.ctx.lineTo(100,75);
+    this.ctx.lineTo(100,25);
     this.ctx.fill();
-    this.limpar();
+
+   // this.ctx.clearRect(0, 0, this.width, this.height);
+    //this.ctx.beginPath();
+    //this.ctx.arc(figura.posicaoX, figura.posicaoY, 5, 0, Math.PI*2, true);
+    //this.ctx.fill();
+    //this.limpar();
    }  
 
   }
@@ -517,6 +524,7 @@ adicionarImagem(url){
     }
     
   }
+  this.limpar();
  
 }
 

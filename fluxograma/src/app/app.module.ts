@@ -11,7 +11,6 @@ import { fluxogramaComponent } from './fluxograma/fluxograma.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
-import { Teste } from './fluxograma/teste.component';
 import { FormsModule } from '@angular/forms';
 import { ScrollingModule, ScrollDispatchModule, ScrollDispatcher } from '@angular/cdk/scrolling';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
@@ -23,6 +22,9 @@ import { CadastrarFluxogramaComponent } from './cadastrar_fluxograma/cadastrarfl
 import { EditarFluxogramaComponent } from './editar_fluxograma/editarfluxograma.component';
 import * as $ from 'jquery';
 import { BasicAuthHtppInterceptorService } from './services/BasicAuthHtppInterceptorService.service ';
+import { TextoFigura } from './fluxograma/texto-figura.component';
+import { TextoSelector } from './fluxograma/texto.component';
+
 
 
 
@@ -32,7 +34,8 @@ import { BasicAuthHtppInterceptorService } from './services/BasicAuthHtppInterce
     AppComponent,
     NotificationsComponent,
     fluxogramaComponent,
-    Teste,
+    TextoFigura,
+    TextoSelector,
     DetalharFluxogramaComponent,
     CadastrarFluxogramaComponent,
     EditarFluxogramaComponent
@@ -64,6 +67,6 @@ import { BasicAuthHtppInterceptorService } from './services/BasicAuthHtppInterce
     multi: true
   }],
   bootstrap: [AppComponent],
-  entryComponents: [Teste]
+  entryComponents: [TextoFigura,TextoSelector]
 })
 export class AppModule { }

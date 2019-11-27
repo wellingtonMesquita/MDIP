@@ -14,7 +14,7 @@ export const ROUTES: RouteInfo[] = [
     { path: 'user', title: 'Cadastrar Usuario',  icon:'ti-user', class: '' },
     { path: 'cadastrar-processos', title: 'Criar Processos',  icon:'ti-ruler-pencil', class: '' },
     { path: 'setor', title: 'Criar Setor',  icon:'ti-ruler-pencil', class: '' },
-    { path: 'user2', title: 'Tutorial',  icon:'ti-ruler-pencil', class: '' },
+    
    
     
 ];
