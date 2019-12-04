@@ -1,24 +1,24 @@
+
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'editarfluxograma-cmp',
+    selector: 'cadastrarprocessos-cmp',
     moduleId: module.id,
-    templateUrl: 'editarfluxograma.component.html'
+    templateUrl: 'cadastrarprocessos.component.html'
 })
 
-export class EditarFluxogramaComponent{
+export class CadastrarProcessosComponent{
     valid = false;
-    idfluxograma;
-    modo = 3;
+    idprocesso;
+    modo = 0;
+    nomeprocesso = "";
 
 constructor(private route: ActivatedRoute){
     this.route.params.subscribe(res => {
-        this.idfluxograma =res.id
-        console.log(this.idfluxograma);
+        this.idprocesso =res.id
+        console.log(this.idprocesso);
         this.valid = true;
     });
-    
-    
   }
 }

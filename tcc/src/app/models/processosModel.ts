@@ -3,4 +3,5 @@ export class processosModel{
     nomeProcesso: string;
     dataCriacao: Date;
     situacao: string;
+    ordem:number;
 }

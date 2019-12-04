@@ -398,7 +398,7 @@ export class fluxogramaComponent implements OnInit, AfterViewInit{
    });
   
    this.mover = false;
-   this.s = 0;
+    this.s = 0;
     this.d = 0;
     this.a = 0;
     this.w = 0;

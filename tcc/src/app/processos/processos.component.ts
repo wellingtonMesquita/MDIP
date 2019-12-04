@@ -71,14 +71,12 @@ declare interface TableData {
           }
     
           pageProcessos(page, size){
-          
             this.filtro.page = page;
             this.filtro.size = size;
             this.loading = true;
             this.service.getProcessoPage(this.filtro).subscribe(res => {
-              console.log("resposta",res);
               this.page = res
-              this.processosSetor =  this.page.content;
+              this.processosSetor =  this.page.content
               this.processos = this.processosSetor.filter(function (a) {
                 return !this[JSON.stringify(a)] && (this[JSON.stringify(a)] = true);
               }, Object.create(null))
@@ -98,8 +96,8 @@ declare interface TableData {
           }
           editar(item:any){
             console.log(item.processosModel.id);
-            //this.router.navigate(['/', 'editarfluxograma',item.processosModel.id]);
-            window.location.replace('http://localhost:4201/editarfluxograma/'+ item.processosModel.id);
+            this.router.navigate(['/', 'editarprocessos',item.processosModel.id]);
+            //window.location.replace('http://localhost:4201/editarfluxograma/'+ item.processosModel.id);
           }
         }
     

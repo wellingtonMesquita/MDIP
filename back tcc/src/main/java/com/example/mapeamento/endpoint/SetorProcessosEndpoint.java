@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("setor_processos")
 public class SetorProcessosEndpoint {
+    Long cont;
 
     @Autowired
     private ProcessosSetoresRepository setoresProcessosRepository;
@@ -22,6 +23,11 @@ public class SetorProcessosEndpoint {
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST, path = "/cadastrar")
     public ResponseEntity<?> processoSalvar(@RequestBody SetoresProcessosModel setoresProcessosModel) {
+        if(setoresProcessosModel.getOrdem() == 0){
+            Long id = setoresProcessosModel.getProcessosModel().getId();
+            setoresProcessosRepository.deleteByProcessosModelId(id);
+        }
+
         return new ResponseEntity<>(setoresProcessosRepository.save(setoresProcessosModel), HttpStatus.OK);
     }
 
@@ -32,6 +38,10 @@ public class SetorProcessosEndpoint {
 
         return new ResponseEntity<>(setorProcessos, HttpStatus.OK);
     }
+
+
+
+    //criar um excluir em cascata
 
 
 }

@@ -73,7 +73,7 @@
                                   <img src="assets/img/formas/exemplo.png" class="card-img-top" alt="">
                                   <div class="card-body">
                                     <h5 class="card-title">{{processosSetor.processosModel.nomeProcesso}}</h5>
-                                    <p class="card-text">{{processosSetor.processosModel.dataCriacao}}</p>
+                                    <p class="card-text">{{processosSetor.processosModel.dataCriacao | date}}</p>
                                     <a [routerLink]="" (click)="detalhar(processosSetor)"><i class="ti-search"></i> </a>
                                     <a [routerLink]="" (click)="editar(processosSetor)"><i class="ti-pencil"></i></a>
                                     <a><i class="ti-close"></i></a>

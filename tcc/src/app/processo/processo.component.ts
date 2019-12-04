@@ -1,4 +1,4 @@
-import { Component, OnInit,EventEmitter } from '@angular/core';
+import { Component, OnInit,EventEmitter, Input } from '@angular/core';
 import { MapeamentoService } from 'app/services/mapeamento.service';
 import { Setor } from 'app/models/setor';
 import { EventEmitterService } from "../services/event-emmiter.service";
@@ -9,12 +9,12 @@ import { ProcessosSetor } from 'app/models/processosSetor';
 declare var $:any;
 
 @Component({
-    selector: 'cadastrar-processo-cmp',
+    selector: 'processo-cmp',
     moduleId: module.id,
-    templateUrl: 'cadastrar-processo.component.html'
+    templateUrl:  'processo.component.html'
 })
 
-export class CadastrarProcessoComponent implements OnInit{
+export class ProcessoComponent implements OnInit{
     public loading = false;
     formCliente: FormGroup;
     router: Router;
@@ -23,8 +23,11 @@ export class CadastrarProcessoComponent implements OnInit{
     setoresSelecionados:Array<Setor> = new Array;
     valid = false;
     validSelecionados = false;
-    idProcesso: number;
     processosSetorModel:ProcessosSetor;
+    idsetorProcesso;
+    @Input() modo: number;
+    @Input() idprocesso:  number;
+    @Input() nomeprocesso: string;
     
     constructor(private service: MapeamentoService, router: Router, private formBuilder: FormBuilder){this.router = router}
     ngOnInit(): void {
@@ -32,21 +35,58 @@ export class CadastrarProcessoComponent implements OnInit{
        this.processosSetorModel = new ProcessosSetor();
        this.processosSetorModel.processosModel = new processosModel();
        this.processosSetorModel.setorModel = new Setor();
+       if(this.modo==1){
        this.loading =true;
+       this.service.getProcessoSetor(this.idprocesso).subscribe(data=>{
+           if(data != null){
+                this.idsetorProcesso = data[0].id;
+                this.validSelecionados = true;
+           }
+           data.forEach(x=>{
+            this.prencherSetores(x.setorModel);
+           })
+      
+           
+       });
+       
+      
+    }
        this.service.buscarSetores().subscribe(data => {
+        console.log("setores",data);
            this.setores = data
            this.loading = false;
            this.valid = true;
            
         
         });
-        this.formCliente = this.formBuilder.group({
-            nomeProcesso: [this.varprocessosmodel.nomeProcesso], 
-        });
+        if(this.modo == 1){
+            this.service.getProcessoid(this.idprocesso).subscribe(data =>{
+                console.log(data);
+                this.nomeprocesso = data.nomeProcesso;
+              });
+            this.varprocessosmodel.nomeProcesso =this.nomeprocesso;
+            this.formCliente = this.formBuilder.group({
+                nomeProcesso: [this.varprocessosmodel.nomeProcesso],
+                id: this.idprocesso
+            });
+
+        }else{
+            this.formCliente = this.formBuilder.group({
+                nomeProcesso: [this.varprocessosmodel.nomeProcesso],
+                id: null
+            });
+        }
+        
+
+       
+
       }
      
     
+prencherSetores(setor: Setor){
+        this.setoresSelecionados.push(setor);
 
+}
     
 
     adicionarSetor(setor:Setor){
@@ -60,6 +100,7 @@ export class CadastrarProcessoComponent implements OnInit{
         if(!verifica){
             this.validSelecionados = true;
             this.setoresSelecionados.push(setor);
+            console.log("pokemon",this.setoresSelecionados);
         }
         
        
@@ -78,30 +119,34 @@ export class CadastrarProcessoComponent implements OnInit{
     }
     cadastrarProcesso(){
         this.service.cadastrarProcesso(this.formCliente.value).subscribe(data => {
-            this.idProcesso = data.id;
+            this.idprocesso = data.id;
             this.cadastrarSetorProcesso();   
         });
     }
 
     cadastrarSetorProcesso(){
-        
+        let cont = 0;
             this.setoresSelecionados.forEach(data=>{
-                this.processosSetorModel.processosModel.id = this.idProcesso;
+                this.processosSetorModel.processosModel.id = this.idprocesso;
                 this.processosSetorModel.setorModel = data;
                 console.log(this.processosSetorModel);
+                      this.processosSetorModel.ordem = cont;
+                      cont ++;
                 this.service.cadastrarProcessoSetor(this.processosSetorModel).subscribe(data=>{
                     console.log(data);
+                    
+                    
                 
                 });
             });
             this.showNotification('top','left','Cadastro feito com sucesso',2);
             //this.router.navigate(['**', 'cadastrarfluxograma',this.idProcesso]);
-            window.location.replace('http://localhost:4201/cadastrarfluxograma/'+ this.idProcesso);
+            window.location.replace('http://localhost:4201/cadastrarfluxograma/'+ this.idprocesso);
         }
 
 
 
-        showNotification(from, align,mensagem,tipo){
+        showNotification(from: string, align: string,mensagem: string,tipo: number){
             var type = ['','info','success','warning','danger'];
     
             var color = Math.floor((Math.random() * 4) + 1);

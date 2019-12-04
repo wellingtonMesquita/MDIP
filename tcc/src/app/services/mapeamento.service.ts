@@ -33,7 +33,6 @@ export class MapeamentoService {
       }
 
       getProcessoPage(ProcessosFiltro){
-       
         return this._http.post<any>('http://localhost:8080/processos/listar',ProcessosFiltro)
         
       }
@@ -42,8 +41,7 @@ export class MapeamentoService {
         
       }
 
-      getProcessoSetor(id){
-       
+      getProcessoSetor(id){ 
         return this._http.get<any>('http://localhost:8080/setor_processos/' + id)
      
       

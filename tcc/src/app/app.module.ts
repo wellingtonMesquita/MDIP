@@ -10,7 +10,6 @@ import { NavbarModule} from './shared/navbar/navbar.module';
 import { FixedPluginModule} from './shared/fixedplugin/fixedplugin.module';
 import { KeyboardShortcutsModule } from "ng-keyboard-shortcuts";
 import { UserComponent }   from './user/user.component';
-import {  CadastrarProcessoComponent }   from './criar-processo/cadastrar-processo.component';
 import { NotificationsComponent }   from './notifications/notifications.component';
 import { UpgradeComponent }   from './upgrade/upgrade.component';
 import { fluxogramaComponent } from './fluxograma/fluxograma.component';
@@ -27,12 +26,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MapeamentoService } from './services/mapeamento.service';
 import { PaginationComponent } from './pagination/paginacao.component';
 import { NgxLoadingModule } from 'ngx-loading';
-import { DetalharFluxogramaComponent } from './detalhar_fluxograma/detalharfluxograma.component';
-import { CadastrarFluxogramaComponent } from './cadastrar_fluxograma/cadastrarfluxograma.component';
-import { EditarFluxogramaComponent } from './editar_fluxograma/editarfluxograma.component';
 import { LoginComponent } from './login/login.component';
 import * as $ from 'jquery';
 import { BasicAuthHtppInterceptorService } from './services/BasicAuthHtppInterceptorService.service ';
+import { ProcessoComponent } from './processo/processo.component';
+import { CadastrarProcessosComponent } from './cadastrar_processos/cadastrarprocessos.component';
+import { EditarProcessosComponent } from './editar_processos/editarprocessos.component';
 
 
 
@@ -44,16 +43,15 @@ import { BasicAuthHtppInterceptorService } from './services/BasicAuthHtppInterce
     AppComponent,
     ProcessosComponent,
     UserComponent,
-    CadastrarProcessoComponent,
+    ProcessoComponent,
     SetorComponent,
     NotificationsComponent,
     UpgradeComponent,
     fluxogramaComponent,
     Teste,
     PaginationComponent,
-    DetalharFluxogramaComponent,
-    CadastrarFluxogramaComponent,
-    EditarFluxogramaComponent,
+    CadastrarProcessosComponent,
+    EditarProcessosComponent,
     LoginComponent
 
   ],
