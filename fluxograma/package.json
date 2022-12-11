@@ -30,7 +30,7 @@
     "canvas2image": "^1.0.5",
     "chartist": "0.9.4",
     "core-js": "^2.5.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "jquery": "^3.4.1",
     "moment": "^2.18.1",
     "ng-keyboard-shortcuts": "^7.1.3",
